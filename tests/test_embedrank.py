@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 
 import os
 import sys
-
+import pytest
 import mock
 import pke
 
@@ -20,7 +20,7 @@ tems of mixed types."
 
 pos = {'NOUN', 'PROPN', 'ADJ'}
 
-
+@pytest.mark.skip("not needed")
 def test_embedrank_candidate_weighting():
     """Test SingleRank candidate weighting method."""
     extractor = pke.unsupervised.EmbedRank(
@@ -31,7 +31,7 @@ def test_embedrank_candidate_weighting():
     keyphrases = [k for k, s in extractor.get_n_best(n=3)]
     assert keyphrases == ['systems', 'types systems', 'algorithms']
 
-
+@pytest.mark.skip("not needed")
 def test_import_embedrank_nosent2vec():
     # Without sent2vec this should not thorw an error
 

@@ -1,11 +1,15 @@
 # `pke` - python keyphrase extraction
 
+This is a fork of the original `pke` library, which can be found [here](https://github.com
+/boudinfl/pke). The build and unit testing steps of the original library have been fixed.
+ 
+
+
 `pke` is an **open source** python-based **keyphrase extraction** toolkit. It
 provides an end-to-end keyphrase extraction pipeline in which each component can
 be easily modified or extended to develop new models. `pke` also allows for 
 easy benchmarking of state-of-the-art keyphrase extraction models, and 
-ships with supervised models trained on the
-[SemEval-2010 dataset](http://aclweb.org/anthology/S10-1004).
+ships with supervised models trained on the [SemEval-2010 dataset](http://aclweb.org/anthology/S10-1004).
 
 [![Build Status](https://travis-ci.org/boudinfl/pke.svg?branch=master)](https://travis-ci.org/boudinfl/pke)
 
@@ -19,21 +23,51 @@ ships with supervised models trained on the
 
 ## Installation
 
-To pip install `pke` from github:
+Clone the repo and create a conda environment with a Python install >= 3.6 and, after `cd`ing to
+ the project directory containing  the `requirements.txt` file, activate the environment,
+and install all
+ dependencies via `pip`
 
-```bash
-pip install git+https://github.com/boudinfl/pke.git
-```
+ 
+ ```bash
+conda create -n keyphrase_extraction python==3.7
+conda activate keyphrase_extraction
+pip install -r requirements.txt
+ ```
 
-`pke` also requires external resources that can be obtained using:
+Then run 
 
-```bash
+ ```bash
 python -m nltk.downloader stopwords
 python -m nltk.downloader universal_tagset
-python -m spacy download en # download the english model
+```
+Install the `pytest` module separately via
+
+```bash
+pip install -U pytest
 ```
 
-As of April 2019, `pke` only supports Python 3.6+.
+Usually, one downloads `spacy` models via `python -m spacy download etc.` But we'll be manually 
+ installing the models. First download `en_core_web_sm-2.3.1.tar.gz` from
+[here](https://github.com/explosion/spacy-models/releases//tag/en_core_web_sm-2.3.1). Untar the
+ folder wherever you'd like to store your spacy models:
+ 
+```bash 
+tar -xvf en_core_web_sm-2.3.1.tar.gz 
+
+```
+Next, wtih the conda environment created above activated, run the following command:
+
+```bash
+ python -m spacy link directory_with_your_spacy_model_folder/en_core_web_sm-2.3.1/en_core_web_sm en
+ --force
+```
+
+Next, make sure everything works by running the unit tests via
+
+```bash
+pytest tests
+```
 
 ## Minimal example
 

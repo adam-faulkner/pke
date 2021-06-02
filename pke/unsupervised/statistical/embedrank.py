@@ -3,10 +3,9 @@ import logging
 
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
-
+import pytest
 
 from pke import LoadFile
-
 
 class EmbedRank(LoadFile):
     """EmbedRank keyphrase extraction model.
@@ -73,7 +72,7 @@ class EmbedRank(LoadFile):
         # Initialize _pos here, if another selection function is used.
         self._pos = {'NOUN', 'PROPN', 'ADJ'}
 
-    def candidate_selection(self, pos=None):
+    def candidate_selection(self, pos={'NOUN', 'PROPN', 'ADJ'}):
         """Candidate selection using longest sequences of PoS.
 
         Args:

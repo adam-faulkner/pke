@@ -165,7 +165,7 @@ class RawTextReader(Reader):
         spacy_model = kwargs.get('spacy_model', None)
 
         if spacy_model is None:
-            spacy_kwargs = {'disable': ['ner', 'textcat', 'parser']}
+            spacy_kwargs = {'disable': ['ner', 'textcat']}#, 'parser']}
             if 'max_length' in kwargs and kwargs['max_length']:
                 spacy_kwargs['max_length'] = kwargs['max_length']
 
@@ -178,13 +178,7 @@ class RawTextReader(Reader):
                     'spacy model is available at https://spacy.io/models.'.format(
                         self.language))
                 spacy_model = spacy.load(str2spacy('en'), **spacy_kwargs)
-            if int(spacy.__version__.split('.')[0]) < 3:
-                sentencizer = spacy_model.create_pipe('sentencizer')
-            else:
-                sentencizer = 'sentencizer'
-            spacy_model.add_pipe(sentencizer)
-
-        spacy_model = fix_spacy_for_french(spacy_model)
+            assert int(spacy.__version__.split('.')[0]) < 3
         spacy_doc = spacy_model(text)
 
         sentences = []
@@ -203,4 +197,3 @@ class RawTextReader(Reader):
                                       **kwargs)
 
         return doc
-
