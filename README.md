@@ -1,7 +1,6 @@
 # `pke` - python keyphrase extraction
 
-This is a fork of the original `pke` library, which can be found [here](https://github.com
-/boudinfl/pke). The build and unit testing steps of the original library have been fixed.
+This is a fork of the original `pke` library, which can be found [here](https://github.com/boudinfl/pke). The build and unit testing steps of the original library have been fixed.
  
 
 
